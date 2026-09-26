@@ -14,7 +14,7 @@ import type { Route } from './+types/_layout';
 
 export function meta() {
   return [
-    { title: i18n._(msg`Sign Document - Documenso`) },
+    { title: i18n._(msg`Sign Document - Nexus Creative Studio`) },
     { name: 'robots', content: 'noindex, nofollow, noarchive, nosnippet, noimageindex' },
   ];
 }
@@ -45,6 +45,14 @@ export default function RecipientLayout({ matches }: Route.ComponentProps) {
       >
         <Outlet />
       </main>
+
+      {/* Fork Nexus: a AGPL-3.0 (seção 13) pede que quem usa o sistema pela rede
+          possa obter o código-fonte desta versão modificada. */}
+      <footer className="pb-6 text-center text-muted-foreground/60 text-xs">
+        <a href="https://github.com/RicardoGrauppe/documenso-nexus" target="_blank" rel="noreferrer">
+          Source code (AGPL-3.0)
+        </a>
+      </footer>
     </div>
   );
 }
