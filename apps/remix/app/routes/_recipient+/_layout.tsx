@@ -48,7 +48,7 @@ export default function RecipientLayout({ matches }: Route.ComponentProps) {
 
       {/* Fork Nexus: a AGPL-3.0 (seção 13) pede que quem usa o sistema pela rede
           possa obter o código-fonte desta versão modificada. */}
-      <footer className="pb-6 text-center text-muted-foreground/60 text-xs">
+      <footer className="pb-6 text-center text-muted-foreground text-xs">
         <a href="https://github.com/RicardoGrauppe/documenso-nexus" target="_blank" rel="noreferrer">
           Source code (AGPL-3.0)
         </a>

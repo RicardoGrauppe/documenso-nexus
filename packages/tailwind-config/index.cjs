@@ -68,19 +68,21 @@ module.exports = {
           foreground: 'hsl(var(--widget-foreground))',
         },
         // Fork Nexus: a paleta "documenso" (verde) virou a escala do azul-marinho da Nexus (#0A113D).
+        // Os valores moram em variáveis (packages/ui/styles/theme.css) pra inverter no tema escuro;
+        // senão texto e fundo azul-marinho somem sobre o fundo escuro.
         documenso: {
-          DEFAULT: '#0A113D',
-          50: '#F4F5FA',
-          100: '#E9EBF4',
-          200: '#D3D7EA',
-          300: '#B2B9DA',
-          400: '#7F8AC0',
-          500: '#4A57A0',
-          600: '#2A367A',
-          700: '#182160',
-          800: '#0A113D',
-          900: '#070C2C',
-          950: '#04071B',
+          DEFAULT: 'rgb(var(--documenso) / <alpha-value>)',
+          50: 'rgb(var(--documenso-50) / <alpha-value>)',
+          100: 'rgb(var(--documenso-100) / <alpha-value>)',
+          200: 'rgb(var(--documenso-200) / <alpha-value>)',
+          300: 'rgb(var(--documenso-300) / <alpha-value>)',
+          400: 'rgb(var(--documenso-400) / <alpha-value>)',
+          500: 'rgb(var(--documenso-500) / <alpha-value>)',
+          600: 'rgb(var(--documenso-600) / <alpha-value>)',
+          700: 'rgb(var(--documenso-700) / <alpha-value>)',
+          800: 'rgb(var(--documenso-800) / <alpha-value>)',
+          900: 'rgb(var(--documenso-900) / <alpha-value>)',
+          950: 'rgb(var(--documenso-950) / <alpha-value>)',
         },
         dawn: {
           DEFAULT: '#aaa89f',

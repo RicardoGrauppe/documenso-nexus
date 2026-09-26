@@ -385,12 +385,8 @@ export const SignInForm = ({
                 />
               )}
 
-              <Button
-                type="submit"
-                size="lg"
-                loading={isSubmitting}
-                className="dark:bg-documenso dark:hover:opacity-90"
-              >
+              {/* Fork Nexus: sem `dark:bg-documenso` (a cor virou azul-marinho e escondia o texto no tema escuro). */}
+              <Button type="submit" size="lg" loading={isSubmitting}>
                 {isSubmitting ? <Trans>Signing in...</Trans> : <Trans>Sign In</Trans>}
               </Button>
             </>

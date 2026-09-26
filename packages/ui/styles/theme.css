@@ -46,6 +46,20 @@
 
     --radius: 0.5rem;
 
+    /* Fork Nexus: escala azul-marinho (classes *-documenso-*), em RGB. */
+    --documenso: 10 17 61;
+    --documenso-50: 244 245 250;
+    --documenso-100: 233 235 244;
+    --documenso-200: 211 215 234;
+    --documenso-300: 178 185 218;
+    --documenso-400: 127 138 192;
+    --documenso-500: 74 87 160;
+    --documenso-600: 42 54 122;
+    --documenso-700: 24 33 96;
+    --documenso-800: 10 17 61;
+    --documenso-900: 7 12 44;
+    --documenso-950: 4 7 27;
+
     --warning: 54 96% 45%;
 
     --gold: 47.9 95.8% 53.1%;
@@ -180,6 +194,20 @@
     --ring: 232 20% 30%;
 
     --radius: 0.5rem;
+
+    /* Fork Nexus: mesma escala invertida (tons claros viram escuros e vice-versa). */
+    --documenso: 193 198 226;
+    --documenso-50: 4 7 27;
+    --documenso-100: 7 12 44;
+    --documenso-200: 10 17 61;
+    --documenso-300: 24 33 96;
+    --documenso-400: 42 54 122;
+    --documenso-500: 74 87 160;
+    --documenso-600: 127 138 192;
+    --documenso-700: 178 185 218;
+    --documenso-800: 211 215 234;
+    --documenso-900: 233 235 244;
+    --documenso-950: 244 245 250;
 
     --warning: 54 96% 45%;
 

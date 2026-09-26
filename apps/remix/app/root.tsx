@@ -7,7 +7,6 @@ import { createPublicEnv } from '@documenso/lib/utils/env';
 import { extractLocaleData } from '@documenso/lib/utils/i18n';
 import { TrpcProvider } from '@documenso/trpc/react';
 import { getOrganisationSession } from '@documenso/trpc/server/organisation-router/get-organisation-session';
-import { cn } from '@documenso/ui/lib/utils';
 import { Toaster } from '@documenso/ui/primitives/toaster';
 import { TooltipProvider } from '@documenso/ui/primitives/tooltip';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v7';
@@ -132,15 +131,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
     // `data-theme`/`class` on <html> before hydration (PreventFlashOnWrongTheme),
     // so the server-rendered attributes never match the client render when the
     // theme is resolved from the system preference. Attribute-only, one level deep.
-    // Fork Nexus: páginas de assinatura sempre no tema claro (a marca da Nexus e
-    // a assinatura desenhada, que tem `dark:invert`, somem no tema escuro).
-    <html
-      translate="no"
-      lang={lang}
-      data-theme={theme}
-      className={cn(theme ?? '', isRecipientRoute && 'dark-mode-disabled')}
-      suppressHydrationWarning
-    >
+    <html translate="no" lang={lang} data-theme={theme} className={theme ?? ''} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/apple-touch-icon.png`} />

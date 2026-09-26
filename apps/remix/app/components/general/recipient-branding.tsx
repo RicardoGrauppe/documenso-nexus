@@ -55,8 +55,13 @@ export const RecipientBranding = ({ branding, cspNonce }: RecipientBrandingProps
   const hasVars = varsString.trim().length > 0;
   const hasUserCss = userCss.trim().length > 0;
 
-  const innerBody = `${hasVars ? `${varsString}\n` : ''}${hasUserCss ? userCss : ''}`.trim();
-  const css = `.documenso-branded { ${innerBody} }`;
+  // Fork Nexus: as cores de marca são escolhidas pro tema claro (os padrões do seletor
+  // são claros), então só valem nele. No tema escuro fica a paleta escura do tema, senão
+  // um texto escuro de marca some sobre o fundo escuro. O CSS personalizado vale nos dois.
+  const lightOnlyVars = hasVars
+    ? `:is(html:not(.dark), html.dark-mode-disabled) .documenso-branded { ${varsString} }\n`
+    : '';
+  const css = `${lightOnlyVars}.documenso-branded { ${hasUserCss ? userCss : ''} }`;
 
   useEffect(() => {
     if (!branding?.allowCustomBranding) {
