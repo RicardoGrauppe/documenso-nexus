@@ -32,6 +32,9 @@ import { themeSessionResolver } from './storage/theme-session.server';
 import { appMetaTags } from './utils/meta';
 import { nonce, nonceContext } from './utils/nonce';
 
+// Fork Nexus: mude quando trocar os ícones, para furar o cache do navegador e da Cloudflare.
+const ICONS_VERSION = 'nexus1';
+
 export const middleware = [nonceMiddleware];
 
 export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
@@ -134,11 +137,13 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
     <html translate="no" lang={lang} data-theme={theme} className={theme ?? ''} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
-        <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/apple-touch-icon.png`} />
-        <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/favicon-32x32.png`} />
-        <link rel="icon" type="image/png" sizes="16x16" href={`${basePath}/favicon-16x16.png`} />
+        {/* Fork Nexus: ?v= força navegador e Cloudflare a trocarem os ícones antigos da Documenso. */}
+        <link rel="apple-touch-icon" sizes="180x180" href={`${basePath}/apple-touch-icon.png?v=${ICONS_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="32x32" href={`${basePath}/favicon-32x32.png?v=${ICONS_VERSION}`} />
+        <link rel="icon" type="image/png" sizes="16x16" href={`${basePath}/favicon-16x16.png?v=${ICONS_VERSION}`} />
+        <link rel="icon" href={`${basePath}/favicon.ico?v=${ICONS_VERSION}`} sizes="any" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+        <link rel="manifest" href={`${basePath}/site.webmanifest?v=${ICONS_VERSION}`} />
         <meta name="google" content="notranslate" />
         <Meta />
         <Links nonce={nonce(cspNonce)} />
