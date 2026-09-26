@@ -1,28 +1,16 @@
-import { Column, Img, Row, Section } from '../components';
-
 export interface TemplateDocumentImageProps {
   assetBaseUrl: string;
   className?: string;
 }
 
-export const TemplateDocumentImage = ({ assetBaseUrl, className }: TemplateDocumentImageProps) => {
-  const getAssetUrl = (path: string) => {
-    return new URL(path, assetBaseUrl).toString();
-  };
-
-  return (
-    <Section className={className}>
-      <Row className="table-fixed">
-        <Column />
-
-        <Column>
-          <Img className="mx-auto h-42" src={getAssetUrl('/static/document.png')} alt="Documenso" />
-        </Column>
-
-        <Column />
-      </Row>
-    </Section>
-  );
+/**
+ * Fork Nexus: a ilustração genérica de documento saiu dos e-mails. Ela não
+ * acrescenta nada, o Gmail mostra botão de download em cima dela e imagem
+ * decorativa pesa contra na filtragem de spam. Os templates continuam chamando
+ * o componente; ele só não renderiza nada.
+ */
+export const TemplateDocumentImage = (_props: TemplateDocumentImageProps) => {
+  return null;
 };
 
 export default TemplateDocumentImage;

@@ -12,20 +12,25 @@ export type TemplateBrandingLogoProps = {
  *
  * - When custom branding is enabled with a logo, the branding logo is shown.
  *   If a safe (http/https) Brand Website is configured, the logo links to it.
- * - Otherwise the Documenso logo is shown.
+ * - Otherwise the Nexus logo (static/logo.png) is shown.
+ *
+ * Fork Nexus: os templates pedem h-6 (24 px), pequeno demais pra logo da Nexus;
+ * aqui a altura sobe pra h-12 (48 px) sem precisar mexer nos 26 templates.
  */
-export const TemplateBrandingLogo = ({ assetBaseUrl, className = 'mb-4 h-6' }: TemplateBrandingLogoProps) => {
+export const TemplateBrandingLogo = ({ assetBaseUrl, className: rawClassName = 'mb-4 h-12' }: TemplateBrandingLogoProps) => {
   const branding = useBranding();
+
+  const className = rawClassName.replace(/\bh-6\b/, 'h-12');
 
   const hasCustomBrandingLogo = branding.brandingEnabled && Boolean(branding.brandingLogo);
 
   if (!hasCustomBrandingLogo) {
     const documensoLogoUrl = new URL('/static/logo.png', assetBaseUrl).toString();
 
-    return <Img src={documensoLogoUrl} alt="Documenso Logo" className={className} />;
+    return <Img src={documensoLogoUrl} alt="Nexus Creative Studio" className={className} />;
   }
 
-  const brandingLogo = <Img src={branding.brandingLogo} alt="Branding Logo" className={className} />;
+  const brandingLogo = <Img src={branding.brandingLogo} alt="Nexus Creative Studio" className={className} />;
 
   const safeBrandingUrl = getSafeBrandingUrl(branding.brandingUrl);
 

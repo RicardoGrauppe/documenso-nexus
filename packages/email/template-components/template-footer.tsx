@@ -1,4 +1,3 @@
-import { Trans } from '@lingui/react/macro';
 import { Fragment } from 'react';
 
 import { Link, Section, Text } from '../components';
@@ -10,37 +9,19 @@ export type TemplateFooterProps = {
   reportUrl?: string;
 };
 
-export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterProps) => {
+/**
+ * Fork Nexus: sem o aviso "Did not expect this email? Click here to report the
+ * sender" e sem o "This document was sent using Documenso". O rodapé fica só com
+ * os dados da marca. isDocument e reportUrl continuam na assinatura pra não
+ * mexer nos templates que passam essas props.
+ */
+export const TemplateFooter = (_props: TemplateFooterProps) => {
   const branding = useBranding();
 
   const safeBrandingUrl = branding.brandingEnabled ? getSafeBrandingUrl(branding.brandingUrl) : null;
 
   return (
     <Section>
-      {reportUrl && (
-        <Text className="my-4 text-base text-muted-foreground">
-          <Trans>
-            Did not expect this email?{' '}
-            <Link className="text-primary" href={reportUrl}>
-              Click here to report the sender
-            </Link>
-            . Never sign a document you don't recognize or weren't expecting.
-          </Trans>
-        </Text>
-      )}
-
-      {isDocument && !branding.brandingHidePoweredBy && (
-        <Text className="my-4 text-base text-muted-foreground">
-          <Trans>
-            This document was sent using{' '}
-            <Link className="text-primary" href="https://documen.so/mail-footer">
-              Documenso
-            </Link>
-            .
-          </Trans>
-        </Text>
-      )}
-
       {branding.brandingEnabled && branding.brandingCompanyDetails && (
         <Text className="my-8 text-muted-foreground text-sm">
           {branding.brandingCompanyDetails.split('\n').map((line, idx) => {
@@ -64,9 +45,11 @@ export const TemplateFooter = ({ isDocument = true, reportUrl }: TemplateFooterP
 
       {!branding.brandingEnabled && (
         <Text className="my-8 text-muted-foreground text-sm">
-          Documenso, Inc.
+          Nexus Creative Studio
           <br />
-          2261 Market Street, #5211, San Francisco, CA 94114, USA
+          <Link href="https://nexusforyou.com" target="_blank">
+            nexusforyou.com
+          </Link>
         </Text>
       )}
     </Section>
