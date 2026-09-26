@@ -1,0 +1,54 @@
+# Fork Nexus: gera a imagem Docker da Documenso com a marca da Nexus e publica
+# no GitHub Container Registry (ghcr.io/ricardograuppe/documenso-nexus).
+# Os workflows da Documenso (testes, traduções, robôs de issue e publicação na
+# conta deles) foram removidos deste fork.
+name: Imagem Docker
+
+on:
+  push:
+    branches: ['main']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: imagem-docker
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tags
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/documenso-nexus
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short,prefix=
+
+      - name: Build e push (linux/amd64, o servidor da Nexus)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./docker/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
