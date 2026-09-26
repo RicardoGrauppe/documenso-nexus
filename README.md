@@ -1,3 +1,8 @@
+> **Fork da Nexus Creative Studio.** Esta é a [Documenso](https://github.com/documenso/documenso) v2.18.0 com a marca da Nexus
+> (logo, cores, e-mails e textos) e sem os avisos de marca da Documenso. As mudanças estão nos commits
+> "Marca Nexus: ..." deste repositório. Licença AGPL-3.0, como o original. A imagem Docker é gerada por
+> `.github/workflows/imagem-docker.yml` e publicada em `ghcr.io/ricardograuppe/documenso-nexus`.
+
 <img src="https://github.com/documenso/documenso/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Documenso Logo">
 
 <p align="center" style="margin-top: 20px">
