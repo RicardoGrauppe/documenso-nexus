@@ -21,11 +21,17 @@ export async function dynamicActivate(locale: string) {
 }
 
 const parseLanguageFromLocale = (locale: string): SupportedLanguageCodes | null => {
-  const [language, _country] = locale.split('-');
+  // Fork Nexus: o cabeçalho vem como "pt-BR;q=0.9". Antes só se comparava a língua ("pt")
+  // com os códigos suportados, e "pt-BR" nunca batia: navegador brasileiro caía no inglês.
+  // Agora tenta o código completo e depois só a língua (pt, pt-PT e pt-BR viram pt-BR).
+  const normalized = locale.split(';')[0].trim().toLowerCase();
+  const [language] = normalized.split('-');
 
-  const foundSupportedLanguage = APP_I18N_OPTIONS.supportedLangs.find(
-    (lang): lang is SupportedLanguageCodes => lang === language,
-  );
+  const foundSupportedLanguage =
+    APP_I18N_OPTIONS.supportedLangs.find((lang): lang is SupportedLanguageCodes => lang.toLowerCase() === normalized) ??
+    APP_I18N_OPTIONS.supportedLangs.find(
+      (lang): lang is SupportedLanguageCodes => lang.toLowerCase().split('-')[0] === language,
+    );
 
   if (!foundSupportedLanguage) {
     return null;
